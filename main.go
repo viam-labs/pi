@@ -1,37 +1,35 @@
-// Package pi implements raspberry pi model 4
-package pi
+package main
 
 import (
-	"fmt"
+	"context"
+
+	goutils "go.viam.com/utils"
+	"main.go/pi"
 
 	"go.viam.com/rdk/components/board"
-	"go.viam.com/rdk/components/board/mcp3008helper"
-	"go.viam.com/rdk/resource"
+	"go.viam.com/rdk/logging"
+	"go.viam.com/rdk/module"
+
+	"github.com/viam-labs/pi/pi/board.go"
 )
 
-var Model = resource.NewModel("viam-labs", "board", "rpi")
+func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) (err error) {
+	modalModule, err := module.NewModuleFromArgs(ctx, logger)
+	if err != nil {
+		return err
+	}
+	modalModule.AddModelFromRegistry(ctx, board.API, pi.Model)
 
-func init() {
-	resource.RegisterComponent(board.API, Model, resource.Registration[board.Board, *Config]{
-		Constructor: newRPI,
-	})
+	err = modalModule.Start(ctx)
+	defer modalModule.Close(ctx)
+	if err != nil {
+		return err
+	}
+
+	<-ctx.Done()
+	return nil
 }
 
-type Config struct {
-	AnalogReaders     []mcp3008helper.MCP3008AnalogConfig `json:"analogs,omitempty"`
-	DigitalInterrupts []board.DigitalInterruptConfig      `json:"digital_interrupts,omitempty"`
-}
-
-func (conf *Config) Validate(path string) ([]string, error) {
-	for idx, c := range conf.AnalogReaders {
-		if err := c.Validate(fmt.Sprintf("%s.%s.%d", path, "analogs", idx)); err != nil {
-			return nil, err
-		}
-	}
-	for idx, c := range conf.DigitalInterrupts {
-		if err := c.Validate(fmt.Sprintf("%s.%s.%d", path, "digital_interrupts", idx)); err != nil {
-			return nil, err
-		}
-	}
-	return nil, nil
+func main() {
+	goutils.ContextualMain(mainWithArgs, logging.NewLogger("RPI"))
 }
