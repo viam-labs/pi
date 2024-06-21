@@ -9,8 +9,6 @@ import (
 	"go.viam.com/rdk/components/board"
 	"go.viam.com/rdk/logging"
 	"go.viam.com/rdk/module"
-
-	"github.com/viam-labs/pi/pi/board.go"
 )
 
 func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) (err error) {
