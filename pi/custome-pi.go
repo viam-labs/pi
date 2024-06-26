@@ -13,7 +13,7 @@ import (
 var Model = resource.NewModel("viam-labs", "board", "rpi4")
 
 func init() {
-	resource.RegisterComponent(board.API, Model, resource.Registration[board.Board, *Config]{
+	resource.RegisterComponent(board.API, Model, resource.Registration[board.Board, *piImpl.Config]{
 		Constructor: newPigpio,
 	},
 	)
