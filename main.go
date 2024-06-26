@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	utils.ContextualMain(mainWithArgs, module.NewLoggerFromArgs("rpi4"))
+	utils.ContextualMain(mainWithArgs, module.NewLoggerFromArgs("custom-pi"))
 }
 
 func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) error {
