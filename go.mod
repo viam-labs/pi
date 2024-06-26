@@ -1,4 +1,4 @@
-module main.go
+module pi-module
 
 go 1.21.9
 
