@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"pi-module/pi"
+	picommon "pi-module/common"
 
 	"go.viam.com/rdk/components/board"
 	"go.viam.com/rdk/logging"
@@ -20,7 +20,7 @@ func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) err
 	if err != nil {
 		return err
 	}
-	pigpio.AddModelFromRegistry(ctx, board.API, pi.Model)
+	pigpio.AddModelFromRegistry(ctx, board.API, picommon.Model)
 
 	pigpio.Start(ctx)
 	defer pigpio.Close(ctx)
