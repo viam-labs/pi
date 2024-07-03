@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	piimpl "pi-module/pi"
 
 	"go.viam.com/rdk/components/board"

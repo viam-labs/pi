@@ -15,7 +15,7 @@ package piimpl
 */
 
 // #include <stdlib.h>
-// #include	"mypigpio.h"
+// #include	"pigpio.h"
 // #include "pi.h"
 import "C"
 
