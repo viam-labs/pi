@@ -44,11 +44,16 @@ import (
 	rdkutils "go.viam.com/rdk/utils"
 )
 
+var Model = resource.NewModel("viam-labs", "board", "rpi4")
+
 // init registers a pi board based on pigpio.
 func init() {
+	// Panic to ensure init is being run
+	panic("init function is being run")
+
 	resource.RegisterComponent(
 		board.API,
-		picommon.Model,
+		Model,
 		resource.Registration[board.Board, *Config]{
 			Constructor: func(
 				ctx context.Context,

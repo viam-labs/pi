@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	picommon "pi-module/common"
+	piimpl "pi-module/pi"
 
 	"go.viam.com/rdk/components/board"
 	"go.viam.com/rdk/logging"
@@ -10,20 +10,25 @@ import (
 	"go.viam.com/utils"
 )
 
+//var Model = resource.NewModel("viam-labs", "board", "rpi4")
+
 func main() {
-	utils.ContextualMain(mainWithArgs, module.NewLoggerFromArgs("custom-pi"))
+	utils.ContextualMain(mainWithArgs, module.NewLoggerFromArgs("pi"))
 }
 
 func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) error {
+	rtkSystem, err := module.NewModuleFromArgs(ctx, logger)
 
-	pigpio, err := module.NewModuleFromArgs(ctx, logger)
 	if err != nil {
 		return err
 	}
-	pigpio.AddModelFromRegistry(ctx, board.API, picommon.Model)
+	rtkSystem.AddModelFromRegistry(ctx, board.API, piimpl.Model)
 
-	pigpio.Start(ctx)
-	defer pigpio.Close(ctx)
+	err = rtkSystem.Start(ctx)
+	defer rtkSystem.Close(ctx)
+	if err != nil {
+		return err
+	}
 
 	<-ctx.Done()
 	return nil
