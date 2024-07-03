@@ -17,15 +17,15 @@ func main() {
 }
 
 func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) error {
-	rtkSystem, err := module.NewModuleFromArgs(ctx, logger)
+	rpi, err := module.NewModuleFromArgs(ctx, logger)
 
 	if err != nil {
 		return err
 	}
-	rtkSystem.AddModelFromRegistry(ctx, board.API, piimpl.Model)
+	rpi.AddModelFromRegistry(ctx, board.API, piimpl.Model)
 
-	err = rtkSystem.Start(ctx)
-	defer rtkSystem.Close(ctx)
+	err = rpi.Start(ctx)
+	defer rpi.Close(ctx)
 	if err != nil {
 		return err
 	}
