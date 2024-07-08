@@ -135,6 +135,7 @@ func initializePigpio() error {
 		return errors.New("failed to clear DMA memory")
 	}
 
+	C.gpioCfgMemAlloc(1)
 	resCode := C.gpioInitialise()
 	if resCode < 0 {
 		// failed to init, check for common causes
