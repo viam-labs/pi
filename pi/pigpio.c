@@ -14134,7 +14134,7 @@ int clearDMAMemory(void) {
    }
 
    // clear the file
-   freopen(VIAM_ALLOC_MEM_HANDLES_FILE, "w", fp);
+   (void)!freopen(VIAM_ALLOC_MEM_HANDLES_FILE, "w", fp);
 
    fclose(fp);
    mbClose(fdMbox);
