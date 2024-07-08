@@ -894,7 +894,7 @@ Assumes two counters per block.  Each counter 4 * 16 (16^4=65536)
 #define PI_MAX_PATH 512
 
 // CUSTOM DEFINES
-#define VIAM_ALLOC_MEM_HANDLES_FILE "alloc_mem_handles.txt"
+#define VIAM_ALLOC_MEM_HANDLES_FILE "/home/live/alloc_mem_handles.txt"
 
 static FILE *fAllocMemHandles = NULL;
 
@@ -14118,7 +14118,7 @@ int clearDMAMemory(void) {
    }
 
    fp = fopen(VIAM_ALLOC_MEM_HANDLES_FILE, "r"); 
-   
+
    if (fp == NULL) {
       printf("Error opening mem alloc file!\n");
       return -1;
