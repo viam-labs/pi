@@ -6569,6 +6569,3 @@ after this command is issued.
 /*DEF_E*/
 
 #endif
-
-int resetDMAChannels(void);
-int clearDMAMemory(void);

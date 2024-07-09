@@ -893,10 +893,6 @@ Assumes two counters per block.  Each counter 4 * 16 (16^4=65536)
 
 #define PI_MAX_PATH 512
 
-// CUSTOM DEFINES
-#define VIAM_ALLOC_MEM_HANDLES_FILE "/home/live/alloc_mem_handles.txt"
-
-static FILE *fAllocMemHandles = NULL;
 
 /* typedef ------------------------------------------------------- */
 
